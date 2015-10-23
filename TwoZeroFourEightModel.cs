@@ -11,11 +11,10 @@ namespace twozerofoureight
         protected int boardSize; // default is 4
         protected int[,] board;
         protected Random rand;
-        private int score;
+        protected bool finish = false;
         public TwoZeroFourEightModel() : this(4)
         {
-            // default board size is 4 
-            score = 2; // initialization score
+            // default board size is 4
         }
 
 
@@ -26,7 +25,16 @@ namespace twozerofoureight
 
         public int GetScore()
         {
-            return score;
+            int sum = 0;
+            int[] range = Enumerable.Range(0, boardSize).ToArray();
+            foreach (int i in range)
+            {
+                foreach (int j in range)
+                {
+                    sum = sum + board[i,j];
+                }
+            }
+            return sum;
         }
 
         public TwoZeroFourEightModel(int size)
@@ -42,6 +50,20 @@ namespace twozerofoureight
             rand = new Random();
             board = Random(board);
             NotifyAll();
+        }
+
+        public bool isFinish()
+        {
+            int sum = 0;
+            int[] range = Enumerable.Range(0, boardSize).ToArray();
+            foreach(int i in range)
+            {
+                foreach(int j in range)
+                {
+                    if (board[i, j] > 0) sum++;
+                }
+            }
+            return sum == 16;
         }
 
         private int[,] Random(int[,] input)
@@ -110,7 +132,6 @@ namespace twozerofoureight
                 }
             }
             board = Random(board);
-            score = score + 2;
             NotifyAll();
         }
 
@@ -163,7 +184,6 @@ namespace twozerofoureight
                 }
             }
             board = Random(board);
-            score = score + 2;
             NotifyAll();
         }
 
@@ -218,7 +238,6 @@ namespace twozerofoureight
                 }
             }
             board = Random(board);
-            score = score + 2;
             NotifyAll();
         }
 
@@ -270,7 +289,6 @@ namespace twozerofoureight
                 }
             }
             board = Random(board);
-            score = score + 2;
             NotifyAll();
         }
     }
