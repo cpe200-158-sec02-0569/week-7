@@ -27,7 +27,7 @@ namespace twozerofoureight
             controller.AddModel(model);
             controller.ActionPerformed(TwoZeroFourEightController.LEFT);
         }
-
+         
         public void Notify(Model m)
         {
             TwoZeroFourEightModel tmp = (TwoZeroFourEightModel)m;
